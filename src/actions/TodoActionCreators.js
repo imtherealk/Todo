@@ -59,3 +59,18 @@ export function checkTodo(id) {
       }
     });
 }
+
+export function loadDetail(id) {
+  let req = superagent
+    .get(Url.resolve(`/api/todos/${id}`))
+    .end((err, res) => {
+      if (err) {
+        console.log(err);
+      }
+      let todo = res.body.data;
+      TodoDispatcher.dispatch({
+        type: 'todo/detail',
+        payload: todo
+      });
+    });
+}
