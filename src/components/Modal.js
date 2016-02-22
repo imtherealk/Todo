@@ -54,7 +54,7 @@ export default class extends React.Component {
     ];
     return (
       <Dialog
-        title="Dialog With Actions"
+        title="Add Todo"
         actions={actions}
         open={this.props.open}
         onRequestClose={this.props.handleClose}>
