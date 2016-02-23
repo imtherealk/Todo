@@ -24,11 +24,12 @@ export default class extends React.Component {
       content: '',
       description: ''
     });
+    this.props.handleClose();
 
   };
 
   save(e) {
-    this.props.handleClose(e);
+    this.handleClose();
     addTodo({
       content: this.state.content,
       description: this.state.description
