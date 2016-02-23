@@ -1,15 +1,8 @@
 import React from 'react';
 import { ListGroup, ListGroupItem } from 'react-bootstrap';
-import List from 'material-ui/lib/lists/list';
-import ListItem from 'material-ui/lib/lists/list-item';
-import Table from 'material-ui/lib/table/table';
-import TableHeaderColumn from 'material-ui/lib/table/table-header-column';
-import TableRow from 'material-ui/lib/table/table-row';
-import TableHeader from 'material-ui/lib/table/table-header';
-import TableRowColumn from 'material-ui/lib/table/table-row-column';
-import TableBody from 'material-ui/lib/table/table-body';
-import Checkbox from 'material-ui/lib/checkbox';
-import Toggle from 'material-ui/lib/toggle';
+import {
+  List, ListItem, Checkbox
+} from 'material-ui';
 
 import {checkTodo} from '../actions/TodoActionCreators';
 

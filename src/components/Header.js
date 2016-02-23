@@ -1,5 +1,4 @@
 import React from 'react';
-import {Navbar, Input, Nav, NavItem, Button} from 'react-bootstrap';
 import {Link} from 'react-router';
 
 import {

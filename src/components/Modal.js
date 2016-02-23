@@ -1,12 +1,14 @@
 import React from 'react';
 import _ from 'lodash';
-import Dialog from 'material-ui/lib/dialog';
-import FlatButton from 'material-ui/lib/flat-button';
-import RaisedButton from 'material-ui/lib/raised-button';
-import TextField from 'material-ui/lib/text-field';
-import IconButton from 'material-ui/lib/icon-button';
+import {
+  Dialog,
+  FlatButton,
+  RaisedButton,
+  TextField,
+  IconButton
+} from 'material-ui';
 
-import {addTodo, loadTodo, setLoadingTrue, setLoadingFalse} from '../actions/TodoActionCreators';
+import {addTodo, loadTodo} from '../actions/TodoActionCreators';
 
 export default class extends React.Component {
   constructor() {
