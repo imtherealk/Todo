@@ -5,31 +5,51 @@ import {
   AppBar,
   RaisedButton,
   IconButton,
-  FlatButton
+  FlatButton,
+  LeftNav,
+  MenuItem
 } from 'material-ui';
 import {
   NavigationClose,
-  ContentAddCircleOutline as AddCircleOutline
-} from 'material-ui/lib/svg-icons'
+  ContentAddCircleOutline as AddCircleOutline,
+  NavigationMenu
+} from 'material-ui/lib/svg-icons';
 import Colors from 'material-ui/lib/styles/colors';
 
-import Modal from './Modal'
+import Modal from './Modal';
+
+const styles = {
+  headline: {
+    fontSize: 24,
+    paddingTop: 16,
+    marginBottom: 12,
+    fontWeight: 400,
+  },
+};
 
 export default class extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalOpen: false
+      modalOpen: false,
+      navOpen: false
     }
   }
-
+  onChange({target: {value}}, name) {
+    this.setState(_.assign({}, this.state, {
+      [name]: value
+    }));
+  }
   handleOpen() {
-    this.setState({modalOpen: true});
+    this.setState(_.assign({}, this.state, {modalOpen: true}));
   };
 
   handleClose() {
-    this.setState({modalOpen: false});
+    this.setState(_.assign({}, this.state, {modalOpen: false}));
   };
+  handleToggle() {
+    this.setState(_.assign({}, this.state, {navOpen: !this.state.navOpen}));
+  }
 
   render() {
     let title = (
@@ -44,13 +64,28 @@ export default class extends React.Component {
           color= {Colors.white}/>
       </IconButton>
     );
+    let leftNavButton = (
+      <IconButton onClick={this.handleToggle.bind(this)}>
+        <NavigationMenu/>
+      </IconButton>
+    )
     return (
       <span>
         <AppBar style={{position: "fixed"}}
                 title={title}
-                iconElementRight={modalAddButton}/>
+                iconElementRight={modalAddButton}
+                iconElementLeft={leftNavButton}>
+        </AppBar>
         <Modal open={this.state.modalOpen}
                handleClose={this.handleClose.bind(this)}/>
+        <LeftNav
+          docked={false}
+          width={200}
+          open={this.state.navOpen}
+          onRequestChange={open => this.setState(_.assign({}, this.state, {navOpen: open}))}>
+          <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
+          <MenuItem onTouchTap={this.handleClose}>About</MenuItem>
+        </LeftNav>
       </span>
     );
   }
