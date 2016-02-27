@@ -12,6 +12,7 @@ class About extends React.Component {
     let state = TodoStore.getState();
     return {};
   }
+
   render() {
     return (
       <div>

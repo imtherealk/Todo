@@ -26,11 +26,13 @@ export default class extends React.Component {
       navOpen: false
     }
   }
+
   onChange({target: {value}}, name) {
     this.setState(_.assign({}, this.state, {
       [name]: value
     }));
   }
+
   handleOpen() {
     this.setState(_.assign({}, this.state, {modalOpen: true}));
   };
@@ -38,6 +40,7 @@ export default class extends React.Component {
   handleClose() {
     this.setState(_.assign({}, this.state, {modalOpen: false}));
   };
+
   handleToggle() {
     this.setState(_.assign({}, this.state, {navOpen: !this.state.navOpen}));
   }
@@ -52,7 +55,7 @@ export default class extends React.Component {
       <IconButton
         onClick={this.handleOpen.bind(this)}>
         <AddCircleOutline
-          color= {Colors.white}/>
+          color={Colors.white}/>
       </IconButton>
     );
     let leftNavButton = (

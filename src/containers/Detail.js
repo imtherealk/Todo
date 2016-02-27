@@ -17,6 +17,7 @@ class Detail extends React.Component {
       status: state.status
     };
   }
+
   render() {
     let {params} = this.props;
     return <TodoDetail id={params.id} {...this.state}/>;
