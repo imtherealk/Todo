@@ -12,7 +12,7 @@ class TodoDetailStore extends ReduceStore {
   }
 
   reduce(state, action) {
-    switch(action.type) {
+    switch (action.type) {
       case 'todo/detail':
         return _.assign({}, state, {
           item: action.payload
