@@ -1,7 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import TodoApp from './components/TodoApp';
+import App from './containers/TodoApp';
 
 require('bootstrap-webpack');
 require('./styles/common.less');
-ReactDOM.render(<TodoApp/>, document.getElementById("main"));
+
+ReactDOM.render(<App/>, document.getElementById("main"));
