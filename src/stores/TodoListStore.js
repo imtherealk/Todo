@@ -4,7 +4,7 @@ import TodoDispatcher from '../dispatcher/TodoDispatcher';
 import {loadTodo} from '../actions/TodoActionCreators'
 import {STATUS} from '../actions/TodoActionCreators';
 
-class TodoStore extends ReduceStore {
+class TodoListStore extends ReduceStore {
     getInitialState() {
         return {
             items: [],
@@ -32,4 +32,4 @@ class TodoStore extends ReduceStore {
     }
 }
 
-export default new TodoStore(TodoDispatcher)
+export default new TodoListStore(TodoDispatcher)

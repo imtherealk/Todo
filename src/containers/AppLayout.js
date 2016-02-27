@@ -1,7 +1,5 @@
 import React from 'react';
-import { Container } from 'flux/utils';
 
-import TodoStore from '../stores/TodoStore';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Main from './Main';
@@ -10,20 +8,11 @@ import {addTodo} from '../actions/TodoActionCreators';
 
 
 class AppLayout extends React.Component {
-  static getStores() {
-    return [TodoStore];
-  }
-
-  static calculateState(prevState) {
-    if (prevState == null) {
-      prevState = {
-        modalOpen: false
-      };
+  constructor() {
+    super();
+    this.state = {
+      modalOpen: false
     }
-    let state = TodoStore.getState();
-    return _.assign({}, prevState, {
-      // Some new states here
-    });
   }
 
   handleClose() {
@@ -55,4 +44,4 @@ class AppLayout extends React.Component {
   }
 }
 
-export default Container.create(AppLayout)
+export default AppLayout;

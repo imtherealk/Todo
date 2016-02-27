@@ -3,16 +3,16 @@ import {Container} from 'flux/utils';
 
 import {loadTodo} from '../actions/TodoActionCreators';
 import {emulateEvent} from 'util';
-import TodoStore from '../stores/TodoStore';
+import TodoListStore from '../stores/TodoListStore';
 import MainSection from '../components/MainSection';
 
 class Main extends React.Component {
   static getStores() {
-    return [TodoStore];
+    return [TodoListStore];
   }
 
   static calculateState(prevState) {
-    let state = TodoStore.getState();
+    let state = TodoListStore.getState();
     return {
       todos: state.items,
       status: state.status

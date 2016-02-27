@@ -1,18 +1,6 @@
 import React from 'react';
-import { Container } from 'flux/utils';
-
-import TodoStore from '../stores/TodoStore';
 
 class About extends React.Component {
-  static getStores() {
-    return [TodoStore];
-  }
-
-  static calculateState(prevState) {
-    let state = TodoStore.getState();
-    return {};
-  }
-
   render() {
     return (
       <div>
@@ -22,4 +10,4 @@ class About extends React.Component {
   }
 }
 
-export default Container.create(About);
+export default About;
