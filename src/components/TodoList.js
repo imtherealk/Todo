@@ -22,6 +22,7 @@ export default class extends React.Component {
       <List>
         {todos.map((todo, idx) => (
           <ListItem
+            href={`#/todos/${todo.id}`}
             key={idx}
             primaryText={todo.content}
             secondaryText={todo.created_at}

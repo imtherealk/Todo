@@ -18,15 +18,6 @@ import Colors from 'material-ui/lib/styles/colors';
 
 import Modal from './Modal';
 
-const styles = {
-  headline: {
-    fontSize: 24,
-    paddingTop: 16,
-    marginBottom: 12,
-    fontWeight: 400,
-  },
-};
-
 export default class extends React.Component {
   constructor() {
     super();
@@ -83,8 +74,8 @@ export default class extends React.Component {
           width={200}
           open={this.state.navOpen}
           onRequestChange={open => this.setState(_.assign({}, this.state, {navOpen: open}))}>
-          <MenuItem onTouchTap={this.handleClose}>Home</MenuItem>
-          <MenuItem onTouchTap={this.handleClose}>About</MenuItem>
+          <MenuItem onTouchTap={this.handleClose.bind(this)}>Home</MenuItem>
+          <MenuItem onTouchTap={this.handleClose.bind(this)}>About</MenuItem>
         </LeftNav>
       </span>
     );
