@@ -8,8 +8,6 @@ import {
   IconButton
 } from 'material-ui';
 
-import {addTodo, loadTodo} from '../actions/TodoActionCreators';
-
 export default class extends React.Component {
   constructor() {
     super();
@@ -28,9 +26,9 @@ export default class extends React.Component {
 
   };
 
-  save(e) {
+  submit() {
     this.handleClose();
-    addTodo({
+    this.props.onSubmit({
       content: this.state.content,
       description: this.state.description
     });
@@ -52,7 +50,7 @@ export default class extends React.Component {
       <FlatButton
         label="Submit"
         primary={true}
-        onClick={(e) => this.save(e)}
+        onClick={this.submit.bind(this)}
       />
     ];
     return (
@@ -65,6 +63,7 @@ export default class extends React.Component {
           key="content"
           onChange={(e) => this.onChange(e, "content")}
           value={this.state.content}
+          autoFocus
           hintText="할 일"/>
         <br/>
         <TextField

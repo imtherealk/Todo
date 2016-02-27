@@ -22,7 +22,6 @@ export default class extends React.Component {
   constructor() {
     super();
     this.state = {
-      modalOpen: false,
       navOpen: false
     }
   }
@@ -32,14 +31,6 @@ export default class extends React.Component {
       [name]: value
     }));
   }
-
-  handleOpen() {
-    this.setState(_.assign({}, this.state, {modalOpen: true}));
-  };
-
-  handleClose() {
-    this.setState(_.assign({}, this.state, {modalOpen: false}));
-  };
 
   handleToggle() {
     this.setState(_.assign({}, this.state, {navOpen: !this.state.navOpen}));
@@ -52,8 +43,7 @@ export default class extends React.Component {
       </span>
     );
     let modalAddButton = (
-      <IconButton
-        onClick={this.handleOpen.bind(this)}>
+      <IconButton onClick={this.props.onModalAddClick}>
         <AddCircleOutline
           color={Colors.white}/>
       </IconButton>
@@ -62,7 +52,7 @@ export default class extends React.Component {
       <IconButton onClick={this.handleToggle.bind(this)}>
         <NavigationMenu/>
       </IconButton>
-    )
+    );
     return (
       <span>
         <AppBar style={{position: "fixed"}}
@@ -70,15 +60,13 @@ export default class extends React.Component {
                 iconElementRight={modalAddButton}
                 iconElementLeft={leftNavButton}>
         </AppBar>
-        <Modal open={this.state.modalOpen}
-               handleClose={this.handleClose.bind(this)}/>
         <LeftNav
           docked={false}
           width={200}
           open={this.state.navOpen}
           onRequestChange={open => this.setState(_.assign({}, this.state, {navOpen: open}))}>
-          <MenuItem onTouchTap={this.handleClose.bind(this)}>Home</MenuItem>
-          <MenuItem onTouchTap={this.handleClose.bind(this)}>About</MenuItem>
+          <MenuItem>Home</MenuItem>
+          <MenuItem>About</MenuItem>
         </LeftNav>
       </span>
     );

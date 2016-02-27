@@ -2,13 +2,9 @@ import React from 'react';
 import {CircularProgress} from 'material-ui';
 
 import TodoList from './TodoList';
-import {loadTodo, STATUS} from '../actions/TodoActionCreators';
-import {emulateEvent} from 'util';
+import {STATUS} from '../actions/TodoActionCreators';
 
 export default class extends React.Component {
-  componentDidMount() {
-    emulateEvent(loadTodo);
-  }
 
   renderNothing() {
     return <div/>;
