@@ -1,9 +1,18 @@
 import React from 'react';
-import { Container } from 'flux/utils';
+import {Container} from 'flux/utils';
 
 import TodoDetailStore from '../stores/TodoDetailStore';
+import EntityStore from '../stores/EntityStore';
 import TodoDetail from '../components/TodoDetail';
-import {checkTodo, STATUS, loadDetail} from '../actions/todoDetail';
+
+
+import {
+  checkTodo,
+  STATUS,
+  loadDetail,
+  setStatus,
+  setItem
+} from '../actions/todoDetail';
 import {emulateEvent} from '../util';
 
 
@@ -42,6 +51,22 @@ class Detail extends React.Component {
 const DetailContainer = Container.create(Detail);
 
 export default class extends React.Component {
+  updateStore(props) {
+    let {id} = props.params;
+    if (EntityStore.hasTodo(id)) {
+      setItem(id);
+      setStatus(STATUS.ONE);
+    } else {
+      setStatus(STATUS.NOTHING);
+    }
+  }
+  componentWillMount() {
+    this.updateStore(this.props);
+  }
+  componentWillUpdate(nextProps) {
+    this.updateStore(nextProps);
+  }
+
   render() {
     let {id} = this.props.params;
     return (

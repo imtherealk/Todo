@@ -27,6 +27,10 @@ class EntityStore extends ReduceStore {
   getTodo(id) {
     return this.getState().todos[id];
   }
+
+  hasTodo(id) {
+    return this.getState().todos.hasOwnProperty(id);
+  }
 }
 
 export default new EntityStore(TodoDispatcher)

@@ -17,6 +17,13 @@ export function setStatus(status) {
   })
 }
 
+export function setItem(itemId) {
+  TodoDispatcher.dispatch({
+    type: 'todo-detail/set',
+    payload: itemId
+  });
+}
+
 export function loadDetail(id) {
   setStatus(STATUS.LOADING);
   let req = superagent
@@ -28,10 +35,7 @@ export function loadDetail(id) {
       let data = res.body.data;
       let {entities, result} = normalize(data, Todo);
       mergeEntities(entities);
-      TodoDispatcher.dispatch({
-        type: 'todo-detail/set',
-        payload: result
-      });
+      setItem(result);
       setStatus(STATUS.ONE);
     });
 }
