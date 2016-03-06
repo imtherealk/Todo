@@ -2,7 +2,7 @@ import React from 'react';
 import {CircularProgress} from 'material-ui';
 
 import TodoList from './TodoList';
-import {STATUS} from '../actions/TodoActionCreators';
+import {STATUS} from '../actions/todoList';
 
 export default class extends React.Component {
 
@@ -21,7 +21,7 @@ export default class extends React.Component {
   renderSome() {
     let {todos} = this.props;
     return (
-      <TodoList todos={todos}/>
+      <TodoList todos={todos} onCheckTodo={this.props.onCheckTodo}/>
     );
   }
 

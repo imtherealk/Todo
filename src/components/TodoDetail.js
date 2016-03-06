@@ -3,27 +3,24 @@ import {
   List,
   ListItem,
   TextField,
-  Checkbox
+  Checkbox,
+  CircularProgress
 } from 'material-ui';
-
-import TodoList from './TodoList';
-import {loadDetail, checkTodo} from '../actions/TodoActionCreators';
-import {emulateEvent} from 'util';
+import {STATUS} from '../actions/todoDetail';
 
 export default class extends React.Component {
-  componentDidMount() {
-    emulateEvent(loadDetail(this.props.id));
+  renderNothing() {
+    return <div/>;
   }
-
-  componentWillUnmount() {
+  renderLoading() {
+    return (
+      <center>
+        <CircularProgress/>
+      </center>
+    );
   }
-
-  onCheck(event, id) {
-    checkTodo(id);
-  }
-
-  render() {
-    let {id, todo} = this.props;
+  renderOne() {
+    let {todo} = this.props;
     return (
       <List>
         <ListItem>
@@ -50,10 +47,19 @@ export default class extends React.Component {
             floatingLabelText="작성시간"/>
         </ListItem>
         <ListItem primaryText="했나?" rightIcon={
-          <Checkbox onCheck={(e) => this.onCheck(e, todo.id)}
+          <Checkbox onCheck={this.props.onCheckTodo}
                     defaultChecked={todo.checked}/>
         }/>
       </List>
-    )
+    );
+  }
+  render() {
+    let {status} = this.props;
+    let statusMap = {
+      [STATUS.NOTHING]: this.renderNothing.bind(this),
+      [STATUS.LOADING]: this.renderLoading.bind(this),
+      [STATUS.ONE]: this.renderOne.bind(this)
+    };
+    return statusMap[status]();
   }
 }

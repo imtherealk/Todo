@@ -3,6 +3,9 @@ import { Container } from 'flux/utils';
 
 import TodoDetailStore from '../stores/TodoDetailStore';
 import TodoDetail from '../components/TodoDetail';
+import {checkTodo, STATUS, loadDetail} from '../actions/todoDetail';
+import {emulateEvent} from '../util';
+
 
 class Detail extends React.Component {
   static getStores() {
@@ -11,17 +14,38 @@ class Detail extends React.Component {
 
   static calculateState(prevState) {
     let state = TodoDetailStore.getState();
-    console.log(state);
     return {
       todo: state.item,
-      status: state.status
+      status: state.status,
+      shouldLoad: (state.status == STATUS.NOTHING)
     };
   }
 
+  componentDidMount() {
+     if (this.state.shouldLoad) {
+       emulateEvent(() => loadDetail(this.props.id));
+     }
+  }
+
+  handleCheckTodo() {
+    let {todo} = this.state;
+    checkTodo(todo.id)
+  }
+
   render() {
-    let {params} = this.props;
-    return <TodoDetail id={params.id} {...this.state}/>;
+    return <TodoDetail todo={this.state.todo}
+                       status={this.state.status}
+                       onCheckTodo={this.handleCheckTodo.bind(this)}/>;
   }
 }
 
-export default Container.create(Detail);
+const DetailContainer = Container.create(Detail);
+
+export default class extends React.Component {
+  render() {
+    let {id} = this.props.params;
+    return (
+      <DetailContainer id={id}/>
+    );
+  }
+}

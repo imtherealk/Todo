@@ -1,7 +1,7 @@
 import React from 'react';
 import {Container} from 'flux/utils';
 
-import {loadTodo, STATUS} from '../actions/TodoActionCreators';
+import {checkTodo, loadTodo, STATUS} from '../actions/todoList';
 import {emulateEvent} from 'util';
 import TodoListStore from '../stores/TodoListStore';
 import MainSection from '../components/MainSection';
@@ -25,8 +25,14 @@ class Main extends React.Component {
     }
   }
 
+  handleCheckTodo(todo) {
+    checkTodo(todo.id)
+  }
+
   render() {
-    return <MainSection {...this.state}/>;
+    return <MainSection todos={this.state.todos}
+                        status={this.state.status}
+                        onCheckTodo={this.handleCheckTodo.bind(this)}/>;
   }
 }
 

@@ -1,15 +1,18 @@
 "use strict";
 import superagent from 'superagent';
+import {normalize, arrayOf} from 'normalizr';
+
 import TodoDispatcher from '../dispatcher/TodoDispatcher';
 import Enum from 'es6-enum';
 import Url from 'util/url';
+import {Todo} from 'schemas';
 
 
 export const STATUS = Enum('NOTHING', 'LOADING', 'NONE', 'SOME');
 
 export function setStatus(status) {
   TodoDispatcher.dispatch({
-    type: 'status/set',
+    type: 'todo-list/set-status',
     payload: status
   })
 }
@@ -36,6 +39,7 @@ export function loadTodo() {
         console.log(err);
       }
       let todos = res.body.data;
+      let {entities, result} = normalize(todos, arrayOf(Todo));
       let status;
       if (todos.length == 0) {
         status = STATUS.NONE;
@@ -43,7 +47,7 @@ export function loadTodo() {
         status = STATUS.SOME;
       }
       TodoDispatcher.dispatch({
-        type: 'todo/set',
+        type: 'todo-list/set',
         payload: todos
       });
       setStatus(status);
@@ -57,20 +61,5 @@ export function checkTodo(id) {
       if (err) {
         console.log(err);
       }
-    });
-}
-
-export function loadDetail(id) {
-  let req = superagent
-    .get(Url.resolve(`/api/todos/${id}`))
-    .end((err, res) => {
-      if (err) {
-        console.log(err);
-      }
-      let todo = res.body.data;
-      TodoDispatcher.dispatch({
-        type: 'todo/detail',
-        payload: todo
-      });
     });
 }

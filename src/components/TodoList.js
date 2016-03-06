@@ -4,18 +4,8 @@ import {
   List, ListItem, Checkbox
 } from 'material-ui';
 
-import {checkTodo} from '../actions/TodoActionCreators';
-
 
 export default class extends React.Component {
-  onCheck(event, id) {
-    checkTodo(id);
-  }
-
-  onClick(event, id) {
-
-  }
-
   render() {
     let todos = this.props.todos;
     return (
@@ -27,11 +17,10 @@ export default class extends React.Component {
             primaryText={todo.content}
             secondaryText={todo.created_at}
             rightIcon={
-            <Checkbox
-              onCheck={(e) => this.onCheck(e, todo.id)}
-              defaultChecked={todo.checked}/>}
-            onClick={(e) => this.onClick(e, todo.id)}>
-          </ListItem>
+              <Checkbox
+                onCheck={(e) => this.props.onCheckTodo(todo)}
+                defaultChecked={todo.checked}/>
+            }/>
         ))}
       </List>
     )

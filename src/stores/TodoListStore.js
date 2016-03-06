@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import { ReduceStore } from 'flux/utils';
 import TodoDispatcher from '../dispatcher/TodoDispatcher';
-import {loadTodo} from '../actions/TodoActionCreators'
-import {STATUS} from '../actions/TodoActionCreators';
+import {STATUS} from '../actions/todoList';
+import EntityStore from './EntityStore';
 
 class TodoListStore extends ReduceStore {
   getInitialState() {
@@ -14,21 +14,25 @@ class TodoListStore extends ReduceStore {
 
   reduce(state, action) {
     switch (action.type) {
-      case 'todo/add':
+      case 'todo-list/add':
         return _.assign({}, state, {
           items: state.items.concat([action.payload])
         });
-      case 'todo/set':
+      case 'todo-list/set':
         return _.assign({}, state, {
           items: action.payload
         });
-      case 'status/set':
+      case 'todo-list/set-status':
         return _.assign({}, state, {
           status: action.payload
         });
       default:
         return state;
     }
+  }
+
+  getItems() {
+    return this.state.items.map(EntityStore.getTodo);
   }
 }
 
