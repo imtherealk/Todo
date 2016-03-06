@@ -15,7 +15,7 @@ class Detail extends React.Component {
   static calculateState(prevState) {
     let state = TodoDetailStore.getState();
     return {
-      todo: state.item,
+      todo: TodoDetailStore.getItem(),
       status: state.status,
       shouldLoad: (state.status == STATUS.NOTHING)
     };

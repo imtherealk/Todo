@@ -25,7 +25,7 @@ class EntityStore extends ReduceStore {
   }
 
   getTodo(id) {
-    return this.state.todos[id];
+    return this.getState().todos[id];
   }
 }
 

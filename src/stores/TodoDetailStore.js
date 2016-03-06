@@ -28,7 +28,7 @@ class TodoDetailStore extends ReduceStore {
   }
 
   getItem() {
-    return EntityStore.getTodo(this.state.item);
+    return EntityStore.getTodo(this.getState().item);
   }
 }
 

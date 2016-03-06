@@ -1,11 +1,11 @@
 "use strict";
 import superagent from 'superagent';
-import {normalize, arrayOf} from 'normalizr';
-
+import {normalize} from 'normalizr';
+import {Todo} from '../schemas';
+import {mergeEntities} from './entity';
 import TodoDispatcher from '../dispatcher/TodoDispatcher';
 import Enum from 'es6-enum';
 import Url from 'util/url';
-import {Todo} from 'schemas';
 
 
 export const STATUS = Enum('NOTHING', 'LOADING', 'ONE');
@@ -25,10 +25,12 @@ export function loadDetail(id) {
       if (err) {
         console.log(err);
       }
-      let todo = res.body.data;
+      let data = res.body.data;
+      let {entities, result} = normalize(data, Todo);
+      mergeEntities(entities);
       TodoDispatcher.dispatch({
         type: 'todo-detail/set',
-        payload: todo
+        payload: result
       });
       setStatus(STATUS.ONE);
     });
