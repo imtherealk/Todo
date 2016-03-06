@@ -32,7 +32,7 @@ class TodoListStore extends ReduceStore {
   }
 
   getItems() {
-    return this.getState().items.map(EntityStore.getTodo);
+    return this.getState().items.map((item) => EntityStore.getTodo(item));
   }
 }
 

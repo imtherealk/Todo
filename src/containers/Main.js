@@ -14,7 +14,7 @@ class Main extends React.Component {
   static calculateState(prevState) {
     let state = TodoListStore.getState();
     return {
-      todos: state.items,
+      todos: TodoListStore.getItems(),
       status: state.status,
       shouldLoad: (state.status == STATUS.NOTHING)
     };

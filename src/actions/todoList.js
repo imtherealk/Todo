@@ -6,6 +6,7 @@ import TodoDispatcher from '../dispatcher/TodoDispatcher';
 import Enum from 'es6-enum';
 import Url from 'util/url';
 import {Todo} from 'schemas';
+import {mergeEntities} from './entity';
 
 
 export const STATUS = Enum('NOTHING', 'LOADING', 'NONE', 'SOME');
@@ -38,17 +39,18 @@ export function loadTodo() {
       if (err) {
         console.log(err);
       }
-      let todos = res.body.data;
-      let {entities, result} = normalize(todos, arrayOf(Todo));
+      let data = res.body.data;
+      let {entities, result} = normalize(data, arrayOf(Todo));
       let status;
-      if (todos.length == 0) {
+      if (result.length == 0) {
         status = STATUS.NONE;
       } else {
         status = STATUS.SOME;
       }
+      mergeEntities(entities);
       TodoDispatcher.dispatch({
         type: 'todo-list/set',
-        payload: todos
+        payload: result
       });
       setStatus(status);
     });
