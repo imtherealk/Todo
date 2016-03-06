@@ -48,7 +48,7 @@ export default class extends React.Component {
         </ListItem>
         <ListItem primaryText="했나?" rightIcon={
           <Checkbox onCheck={this.props.onCheckTodo}
-                    defaultChecked={todo.checked}/>
+                    checked={todo.checked}/>
         }/>
       </List>
     );

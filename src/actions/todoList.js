@@ -19,7 +19,7 @@ export function setStatus(status) {
 }
 
 export function addTodo(form) {
-  let req = superagent
+  superagent
     .post(Url.resolve('/api/todos/'))
     .set('Content-Type', 'application/x-www-form-urlencoded')
     .send(form)
@@ -33,7 +33,7 @@ export function addTodo(form) {
 
 export function loadTodo() {
   setStatus(STATUS.LOADING);
-  let req = superagent
+  superagent
     .get(Url.resolve('/api/todos/'))
     .end((err, res) => {
       if (err) {
@@ -53,15 +53,5 @@ export function loadTodo() {
         payload: result
       });
       setStatus(status);
-    });
-}
-
-export function checkTodo(id) {
-  let req = superagent
-    .post(Url.resolve(`/api/todos/${id}/check`))
-    .end((err, res) => {
-      if (err) {
-        console.log(err);
-      }
     });
 }

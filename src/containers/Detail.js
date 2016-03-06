@@ -5,9 +5,8 @@ import TodoDetailStore from '../stores/TodoDetailStore';
 import EntityStore from '../stores/EntityStore';
 import TodoDetail from '../components/TodoDetail';
 
-
+import {checkTodo} from '../actions/todo';
 import {
-  checkTodo,
   STATUS,
   loadDetail,
   setStatus,
@@ -18,7 +17,7 @@ import {emulateEvent} from '../util';
 
 class Detail extends React.Component {
   static getStores() {
-    return [TodoDetailStore];
+    return [TodoDetailStore, EntityStore];
   }
 
   static calculateState(prevState) {

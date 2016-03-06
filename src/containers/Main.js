@@ -1,14 +1,16 @@
 import React from 'react';
 import {Container} from 'flux/utils';
 
-import {checkTodo, loadTodo, STATUS} from '../actions/todoList';
+import {checkTodo} from '../actions/todo';
+import {loadTodo, STATUS} from '../actions/todoList';
 import {emulateEvent} from 'util';
 import TodoListStore from '../stores/TodoListStore';
+import EntityStore from '../stores/EntityStore';
 import MainSection from '../components/MainSection';
 
 class Main extends React.Component {
   static getStores() {
-    return [TodoListStore];
+    return [TodoListStore, EntityStore];
   }
 
   static calculateState(prevState) {

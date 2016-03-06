@@ -19,7 +19,7 @@ export default class extends React.Component {
             rightIcon={
               <Checkbox
                 onCheck={(e) => this.props.onCheckTodo(todo)}
-                defaultChecked={todo.checked}/>
+                checked={todo.checked}/>
             }/>
         ))}
       </List>
